@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_un"
+        android:background="@color/white"
+        android:icon="@drawable/ic_menu_random"
+        android:title="@string/menu_un" />
+    <item
+        android:id="@+id/action_deux"
+        android:icon="@drawable/ic_menu_list"
+        android:title="@string/menu_deux" />
+    <item
+        android:id="@+id/action_trois"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/menu_trois" />
+</menu>
