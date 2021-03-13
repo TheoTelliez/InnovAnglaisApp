@@ -14,11 +14,13 @@ import com.example.innovanglaisapp.model.Innov;
 
 public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.ViewHolder> {
 
-   Innov innov;
+    Innov innov;
+    private ThemesListClickListener themesListClickListener;
 
 
     public ThemesListAdapter(Innov innov, ThemesListClickListener themesListClickListener){
        this.innov = innov; //innov permet de savoir toutes les données dont on va se servir
+       this.themesListClickListener = themesListClickListener;
 
     }
 
@@ -32,19 +34,19 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ThemesListAdapter.ViewHolder holder, final int position) {
-        holder.themeNameCell.setText(innov.getTodo().get(position).getLibelle());
-//        holder.themeNameCell.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                themesListClickListener.onThemeListClick(innov.getTodo().get(position));
-//            }
-//        });
+        holder.themeNameCell.setText(innov.getHydra().get(position).getLibelle());
+        holder.themeNameCell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                themesListClickListener.onThemeListClick(innov.getHydra().get(position));
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return innov.getTodo().size();
+        return innov.getHydra().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

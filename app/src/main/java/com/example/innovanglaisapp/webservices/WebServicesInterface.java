@@ -8,8 +8,7 @@ import retrofit2.http.GET;
 public interface WebServicesInterface {
 
     @GET("themes")
-    Call<Innov> getTodoByTheme();
-
+    Call<Innov> getHydraByTheme();
 
     // Exemple :  http://serveur1.arras-sio.com/symfony4-4059/InnovAnglais/public/api/themes
 

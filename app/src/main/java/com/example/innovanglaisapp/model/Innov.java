@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Innov {
-    @SerializedName("innov")
-    private List<Todo> todo = null;
+    @SerializedName("hydra:member")
+    private List<Hydra> hydra = null;
 
-    public List<Todo> getTodo() {
-        return todo;
+    public List<Hydra> getHydra() {
+        return hydra;
     }
 
-    public void setTodo(List<Todo> todo) {
-        this.todo = todo;
+    public void setHydra(List<Hydra> hydra) {
+        this.hydra = hydra;
     }
 
 

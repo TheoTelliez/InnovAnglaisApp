@@ -1,6 +1,5 @@
 package com.example.innovanglaisapp.themes;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.innovanglaisapp.MainActivity;
 import com.example.innovanglaisapp.R;
 import com.example.innovanglaisapp.model.Innov;
+import com.example.innovanglaisapp.model.Hydra;
 import com.example.innovanglaisapp.webservices.WebServicesInterface;
 
 import retrofit2.Call;
@@ -23,12 +23,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-//public class ThemesListFragment extends Fragment implements ThemesListClickListener {
-public class ThemesListFragment extends Fragment {
+public class ThemesListFragment extends Fragment implements ThemesListClickListener {
+//public class ThemesListFragment extends Fragment {
 
     private RecyclerView themeListRecyclerView;
     private RecyclerView.Adapter innovListAdapter;
-
+    private RecyclerView.LayoutManager themeListLayoutManager;
 
     @Nullable
     @Override
@@ -36,16 +36,14 @@ public class ThemesListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_list, null); //le 2e paramètre sera toujours null tandis que le premier représentera l’id de notre layout de fragment (ici : R.layout.fragment_random).
     }
 
-
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        themeListRecyclerView = view.findViewById(R.id.categoryListRecyclerView);
+        themeListRecyclerView = view.findViewById(R.id.themesListRecyclerView);
         themeListRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager themeListLayoutManager = new LinearLayoutManager(getContext());
         themeListRecyclerView.setLayoutManager(themeListLayoutManager);
-
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://serveur1.arras-sio.com/symfony4-4059/InnovAnglais/public/api/")
@@ -54,12 +52,12 @@ public class ThemesListFragment extends Fragment {
 
         WebServicesInterface webServicesInterface = retrofit.create(WebServicesInterface.class);
 
-        Call<Innov> callGetTodoByTheme = webServicesInterface.getTodoByTheme();
+        Call<Innov> callGetHydraByTheme = webServicesInterface.getHydraByTheme();
 
-        callGetTodoByTheme.enqueue(new Callback<Innov>() {
+        callGetHydraByTheme.enqueue(new Callback<Innov>() {
             @Override
             public void onResponse(Call<Innov> call, Response<Innov> response) {
-                innovListAdapter = new ThemesListAdapter(response.body(), (MainActivity)getActivity()); // Ca bug ici :((((
+                innovListAdapter = new ThemesListAdapter(response.body(), (MainActivity)getActivity()); // Ici c'est tricky :(
                 themeListRecyclerView.setAdapter(innovListAdapter);
             }
 
@@ -70,16 +68,12 @@ public class ThemesListFragment extends Fragment {
         });
     }
 
-    ;
 
-//    @Override
-//    public void onThemeListClick(Todo todo) {
-//        System.out.println(todo.getLibelle());
-//        Intent drinkDetailListingActivityIntent = new Intent(getActivity(), CocktailsListFragment.class);
-//        String s = todo.getLibelle();
-//        drinkDetailListingActivityIntent.putExtra("nameDuStrCategory", s);
-//        startActivity(drinkDetailListingActivityIntent);
-//    }
+    @Override
+    public void onThemeListClick(Hydra hydra) {
+        System.out.println(hydra.getLibelle());
+
+    }
 
 }
 

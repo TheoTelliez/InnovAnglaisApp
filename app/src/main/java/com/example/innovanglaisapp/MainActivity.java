@@ -7,12 +7,18 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.innovanglaisapp.accueil.AccueilFragment;
+import com.example.innovanglaisapp.model.Hydra;
+import com.example.innovanglaisapp.stats.StatsFragment;
+import com.example.innovanglaisapp.themes.ThemesListClickListener;
 import com.example.innovanglaisapp.themes.ThemesListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ThemesListClickListener {
 
     Fragment themeFragment;
+    Fragment accueilFragment;
+    Fragment statsFragment;
     BottomNavigationView navigationView;
 
     @Override
@@ -20,14 +26,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        randomFragment = new RandomFragment();
         themeFragment = new ThemesListFragment();
-//        searchFragment = new SearchFragment(this);
+        accueilFragment = new AccueilFragment();
+        statsFragment = new StatsFragment();
 
-        loadFragment(themeFragment); //sert à dire que le fragment par défaut quand on lance l'appli c'est celui de texte
+        loadFragment(accueilFragment); //sert à dire que le fragment par défaut quand on lance l'appli c'est celui de texte
 
         navigationView = findViewById(R.id.bottomNavigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
+
+
+
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -45,14 +54,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         switch (item.getItemId()) {
-//            case R.id.action_un:
-//                fragment = randomFragment;
-//                break;
-//            case R.id.action_deux:
-//                fragment = listFragment;
-//                break;
-            case R.id.action_trois:
+            case R.id.action_un:
                 fragment = themeFragment;
+                break;
+            case R.id.action_deux:
+                fragment = accueilFragment;
+                break;
+            case R.id.action_trois:
+                fragment = statsFragment;
                 break;
             default: //si jamais il ne fait ni l'un ni l'autre alors on fait un truc quand même par defaut
                 break;
@@ -60,4 +69,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return loadFragment(fragment); //ca c'est pour savoir si ca s'est bien passé, il retourne bien normalement
     }
 
+
+    @Override
+    public void onThemeListClick(Hydra hydra) {
+        System.out.println(hydra.getLibelle()); //C'est qui qui faut passer le param
+    }
 }

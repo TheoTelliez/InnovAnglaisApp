@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">InnovAnglaisApp</string>
-    <string name="menu_un">Un</string>
-    <string name="menu_deux">Deux</string>
-    <string name="menu_trois">Trois</string>
+    <string name="menu_un">Thèmes</string>
+    <string name="menu_deux">Accueil</string>
+    <string name="menu_trois">Statistiques</string>
     <string name="test">Test</string>
 </resources>

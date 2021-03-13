@@ -1,16 +1,13 @@
 package com.example.innovanglaisapp.model;
 
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Todo {
+public class Hydra {
 
-    @Expose
     @SerializedName("id")
     int id;
 
-    @Expose
     @SerializedName("libelle")
     String libelle;
 

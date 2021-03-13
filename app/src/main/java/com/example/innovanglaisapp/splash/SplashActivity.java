@@ -32,7 +32,6 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-
     private void changeStatusBarColor(int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { //version M = marshmallow = API 23 pour nous
             Window window = getWindow();
