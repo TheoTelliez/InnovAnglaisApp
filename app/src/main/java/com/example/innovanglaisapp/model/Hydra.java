@@ -3,6 +3,11 @@ package com.example.innovanglaisapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Hydra {
 
     @SerializedName("id")
@@ -11,24 +16,50 @@ public class Hydra {
     @SerializedName("libelle")
     String libelle;
 
+    @SerializedName("utilisateurs")
+    String[] utilisateurs;
 
-    //id
+    @SerializedName("theme")
+    String theme;
+
+    @SerializedName("liste")
+    String[] liste;
+
+    @SerializedName("libelleen")
+    String libelleen;
+
+    // id
     public int getId() {
         return id;
     }
 
-    public void setId() {
-        this.id = id;
-    }
-
-    //libelle
+    // libelle
     public String getLibelle() {
         return libelle;
     }
 
-    public void setLibelle() {
-        this.libelle = libelle;
+    //utilisateurs
+    public String[] getUtilisateurs() {
+        return utilisateurs;
     }
+
+    // theme
+    public String getTheme() {
+        return theme;
+    }
+
+    // listes
+    public String[] getListe() {
+        return liste;
+    }
+
+    // libelle
+    public String getLibelleEn() {
+        return libelleen;
+    }
+
+
+
 
 
 

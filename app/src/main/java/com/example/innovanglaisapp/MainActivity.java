@@ -8,13 +8,16 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.innovanglaisapp.accueil.AccueilFragment;
+import com.example.innovanglaisapp.listes.ListesListClickListener;
+import com.example.innovanglaisapp.listes.ListesListFragment;
 import com.example.innovanglaisapp.model.Hydra;
+import com.example.innovanglaisapp.mots.MotsListFragment;
 import com.example.innovanglaisapp.stats.StatsFragment;
 import com.example.innovanglaisapp.themes.ThemesListClickListener;
 import com.example.innovanglaisapp.themes.ThemesListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ThemesListClickListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ThemesListClickListener, ListesListClickListener {
 
     Fragment themeFragment;
     Fragment accueilFragment;
@@ -55,10 +58,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.action_un:
-                fragment = themeFragment;
+                fragment = accueilFragment;
                 break;
             case R.id.action_deux:
-                fragment = accueilFragment;
+                fragment = themeFragment;
                 break;
             case R.id.action_trois:
                 fragment = statsFragment;
@@ -72,6 +75,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onThemeListClick(Hydra hydra) {
-        System.out.println(hydra.getLibelle()); //C'est qui qui faut passer le param
+        loadFragment(new ListesListFragment(hydra.getId()));
+        System.out.println(hydra.getId()); //C'est qui qui faut passer le param
     }
+
+
+    @Override
+    public void onListeListClick(Hydra hydra) {
+        loadFragment(new MotsListFragment(hydra.getId()));
+        System.out.println(hydra.getId()); //C'est qui qui faut passer le param
+    }
+
 }

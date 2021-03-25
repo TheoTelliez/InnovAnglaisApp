@@ -2,12 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_un"
-        android:background="@color/white"
-        android:icon="@drawable/ic_list"
+        android:icon="@drawable/ic_home"
         android:title="@string/menu_un" />
     <item
         android:id="@+id/action_deux"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_list"
         android:title="@string/menu_deux" />
     <item
         android:id="@+id/action_trois"

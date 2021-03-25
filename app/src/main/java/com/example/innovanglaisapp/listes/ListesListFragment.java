@@ -1,4 +1,4 @@
-package com.example.innovanglaisapp.themes;
+package com.example.innovanglaisapp.listes;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +15,12 @@ import com.example.innovanglaisapp.MainActivity;
 import com.example.innovanglaisapp.R;
 import com.example.innovanglaisapp.model.Innov;
 import com.example.innovanglaisapp.model.Hydra;
+import com.example.innovanglaisapp.themes.ThemesListAdapter;
 import com.example.innovanglaisapp.webservices.WebServicesInterface;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,12 +28,16 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ThemesListFragment extends Fragment implements ThemesListClickListener {
-//public class ThemesListFragment extends Fragment {
+public class ListesListFragment extends Fragment implements ListesListClickListener {
 
-    private RecyclerView themeListRecyclerView;
+    private RecyclerView listeListRecyclerView;
     private RecyclerView.Adapter innovListAdapter;
-    private RecyclerView.LayoutManager themeListLayoutManager;
+    private int idTheme;
+
+    public ListesListFragment(int idTheme) {
+        this.idTheme = idTheme;
+    }
+
 
     @Nullable
     @Override
@@ -40,10 +49,10 @@ public class ThemesListFragment extends Fragment implements ThemesListClickListe
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        themeListRecyclerView = view.findViewById(R.id.listRecyclerView);
-        themeListRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager themeListLayoutManager = new LinearLayoutManager(getContext());
-        themeListRecyclerView.setLayoutManager(themeListLayoutManager);
+        listeListRecyclerView = view.findViewById(R.id.listRecyclerView);
+        listeListRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager listeListLayoutManager = new LinearLayoutManager(getContext());
+        listeListRecyclerView.setLayoutManager(listeListLayoutManager);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://serveur1.arras-sio.com/symfony4-4059/InnovAnglais/public/api/")
@@ -52,13 +61,27 @@ public class ThemesListFragment extends Fragment implements ThemesListClickListe
 
         WebServicesInterface webServicesInterface = retrofit.create(WebServicesInterface.class);
 
-        Call<Innov> callGetHydraByTheme = webServicesInterface.getHydraByTheme();
+        Call<Innov> callGetHydraByListe = webServicesInterface.getHydraByListe();
 
-        callGetHydraByTheme.enqueue(new Callback<Innov>() {
+        callGetHydraByListe.enqueue(new Callback<Innov>() {
             @Override
             public void onResponse(Call<Innov> call, Response<Innov> response) {
-                innovListAdapter = new ThemesListAdapter(response.body(), (MainActivity)getActivity()); // Ici c'est tricky :(
-                themeListRecyclerView.setAdapter(innovListAdapter);
+                ArrayList<Hydra> listeTrier = new ArrayList<>();
+                int i;
+
+                assert response.body() != null; // Si hydra null pointer
+
+                int sizeTab = response.body().getHydra().size();
+                String themeActuel = "/symfony4-4059/InnovAnglais/public/api/themes/";
+
+                for(i = 0; i < sizeTab ; i++) {
+                    if(response.body().getHydra().get(i).getTheme().equals(themeActuel + idTheme)){
+                        listeTrier.add((response.body().getHydra().get(i)));
+                    }
+                }
+
+                innovListAdapter = new ListesListAdapter(listeTrier, (MainActivity)getActivity()); // Ici c'est tricky :(
+                listeListRecyclerView.setAdapter(innovListAdapter);
             }
 
             @Override
@@ -70,10 +93,29 @@ public class ThemesListFragment extends Fragment implements ThemesListClickListe
 
 
     @Override
-    public void onThemeListClick(Hydra hydra) {
+    public void onListeListClick(Hydra hydra) {
         System.out.println(hydra.getLibelle());
 
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

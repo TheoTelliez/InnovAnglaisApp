@@ -27,7 +27,7 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
     @NonNull
     @Override
     public ThemesListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.themes_list_cell, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_cell, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -55,7 +55,7 @@ public class ThemesListAdapter extends RecyclerView.Adapter<ThemesListAdapter.Vi
 
         public ViewHolder(@NonNull View itemList) {
             super(itemList);
-            themeNameCell = itemList.findViewById(R.id.themeNameCell);
+            themeNameCell = itemList.findViewById(R.id.nameCell);
 
         }
     }
